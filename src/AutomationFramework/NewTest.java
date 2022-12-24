@@ -39,7 +39,7 @@ public class NewTest {
   public void toVerifyTitle()
   {
 	  
-	  String actualTitle= driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div[2]/main/div/div[1]/div/article/div/div/h3")).getText();
+	  String actualTitle= driver.findElement(By.xpath("//h3[@class=\"post-title entry-title\"]")).getText();
 	  String expectedTitle = "Demo Sign-Up Selenium Automation Practice Form";
 	  assertEquals(actualTitle,expectedTitle);
 	  sleep(2000);
