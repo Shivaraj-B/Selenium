@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -27,8 +28,9 @@ public class NewWebsite {
 		driver.manage().window().maximize();
 		
 	}
+	
 	@Test
-	public void toFillTheForm()
+	public void toFillTheAlertForm()
 	{
 		driver.findElement(By.linkText("Alert")).click();
 		sleep(2000);
@@ -58,7 +60,7 @@ public class NewWebsite {
 		String actual=driver.findElement(By.xpath("//p[@id='alert']")).getText();
 		assertEquals(actual, expected);
 		System.out.print("Message is matching");
-		
+		sleep(1000);
 		
 		
 		
@@ -67,13 +69,73 @@ public class NewWebsite {
 		
 		
 	}
+	@Test
+	public void toFillTheRegistrationForm()
+	{
+//Uncomment these 5 lines whenever we want to run the test cases separately//		driver.findElement(By.linkText("Alert")).click();
+//		sleep(2000);
+//		ArrayList<String> arr1 = new ArrayList<String>(driver.getWindowHandles());
+//		driver.switchTo().window(arr1.get(1));
+//		sleep(1000);
+		driver.findElement(By.xpath("/html/body/div[4]/div/div/div/div/div/form/div[2]/div/p[1]/a")).click();
+		sleep(2000);
+		driver.findElement(By.xpath("//img[@alt='registration']")).click();
+		sleep(1000);
+		ArrayList<String> arr2 = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(arr2.get(2));
+		sleep(1000);
+		String title = driver.getTitle();
+		System.out.println(title);
+		driver.findElement(By.name("name")).sendKeys("Kamal");
+		sleep(1000);
+		driver.findElement(By.xpath("/html/body/section/div[1]/div/div/form/fieldset[1]/p[2]/input")).sendKeys("Pahan");
+		sleep(1000);
+		driver.findElement(By.xpath("/html/body/section/div[1]/div/div/form/fieldset[2]/div/label[2]/input")).click();
+		sleep(1000);
+		driver.findElement(By.xpath("/html/body/section/div[1]/div/div/form/fieldset[3]/div/label[2]/input")).click();
+		sleep(1000);
+		driver.findElement(By.xpath("/html/body/section/div[1]/div/div/form/fieldset[3]/div/label[3]/input")).click();
+		sleep(1000);
+		WebElement country = driver.findElement(By.xpath("/html/body/section/div[1]/div/div/form/fieldset[4]/select"));
+		Select dropdown1 = new Select(country);
+		dropdown1.selectByVisibleText("India");
+		sleep(1000);
+		Select dropdown2= new Select(driver.findElement(By.xpath("/html/body/section/div[1]/div/div/form/fieldset[5]/div[1]/select")));
+		dropdown2.selectByVisibleText("1");
+		sleep(1000);
+		Select dropdown3= new Select(driver.findElement(By.xpath("/html/body/section/div[1]/div/div/form/fieldset[5]/div[2]/select")));
+		dropdown3.selectByVisibleText("1");
+		sleep(1000);
+		Select dropdown4= new Select(driver.findElement(By.xpath("/html/body/section/div[1]/div/div/form/fieldset[5]/div[3]/select")));
+		dropdown4.selectByVisibleText("2014");
+		sleep(1000);
+		WebElement upload=driver.findElement(By.xpath("/html/body/section/div[1]/div/div/form/fieldset[9]/input"));
+		upload.sendKeys("C:\\Users\\shib1\\Documents\\Selenium\\Anusha\\TODO.txt");
+		sleep(1000);
+		System.out.println("File is uploaded successfully");
+		driver.findElement(By.name("phone")).sendKeys("12345678");
+		sleep(1000);
+		driver.findElement(By.name("username")).sendKeys("test");
+		sleep(1000);
+		driver.findElement(By.name("email")).sendKeys("kamal@gmail.com");
+		sleep(1000);
+		driver.findElement(By.xpath("/html/body/section/div[1]/div/div/form/fieldset[10]/textarea")).sendKeys("abcd");
+		sleep(1000);
+		driver.findElement(By.name("password")).sendKeys("test");
+		sleep(1000);
+		driver.findElement(By.name("c_password")).sendKeys("test");
+		sleep(1000);
+		driver.findElement(By.xpath("//*[@value='submit']")).click();
+		sleep(1000);
+		
+	}
  @AfterClass
  public void afterClass()
  {
-	 //driver.close();
+	 //driver.quit();
  }
  
- public static void sleep(long ms) 
+ public  void sleep(long ms) 
  {
 	 try {
 		Thread.sleep(ms);
